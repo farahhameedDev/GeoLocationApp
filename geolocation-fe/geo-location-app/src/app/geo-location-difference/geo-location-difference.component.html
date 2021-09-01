@@ -1,9 +1,22 @@
-<p>geo-location-difference works!</p>
 
-<mat-form-field class="geolocation-form-field" appearance="fill">
-    <input matInput type="text" [(ngModel)]="ipaddress" placeholder="Enter the IP Address or URL">
-    <button aria-label="Show" (click)="getdetails(ipaddress)">
+    <input matInput type="text" [(ngModel)]="ipAddress" placeholder="Enter the IP Address or URL">
+    <button mat-button aria-label="Show" (click)="getdetails()">Show
     </button>
 
-    <mat-label>Total Hours Difference  = {{totalHoursDifference}}</mat-label>
-</mat-form-field>
+    <div style="margin-bottom: 20px;">
+        <mat-label><b>Total Hours Difference  = </b>{{totalHoursDifference}}</mat-label>
+    </div>
+
+    <div >
+        <div *ngIf="clientLocation" class="box">
+            <mat-label class="highlight">Your Location</mat-label>
+            <app-geo-location-details [geoLocationDetail]="clientLocation"></app-geo-location-details>
+            
+        </div>
+        <div *ngIf="inputLocation" class="box mar-20">
+            <mat-label class="highlight">Location Informed</mat-label>
+            <app-geo-location-details [geoLocationDetail]="inputLocation"></app-geo-location-details>
+        </div>
+    </div>
+   
+

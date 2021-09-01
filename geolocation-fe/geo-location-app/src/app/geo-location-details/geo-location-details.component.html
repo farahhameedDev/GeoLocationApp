@@ -1,6 +1,6 @@
-<div>
-    <label for="country">Country: {{country}} </label>
-    <label for="city">City: {{city}} </label>
-    <label for="timeZone">Timezone: {{timeZone}} </label>
-    <label for="localTime">Local Time: {{localTime}} </label>
+<div *ngIf="geoLocationDetail">
+    <p ><b>Country: </b>{{geoLocationDetail.country}} </p>
+    <p ><b>City: </b>{{geoLocationDetail.city}} </p>
+    <p><b>Timezone: </b>{{geoLocationDetail.timeZone}} </p>
+    <p><b>Local Time: </b>{{geoLocationDetail.localTime}} </p>
 </div>

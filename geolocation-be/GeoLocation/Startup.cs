@@ -22,6 +22,17 @@ namespace GeoLocationApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Named Policy
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: "AllowOrigin",
+                    builder =>
+                    {
+                        builder.AllowAnyHeader()
+                               .AllowAnyMethod()
+                               .AllowAnyOrigin();
+                    });
+            });
             services.AddAutoMapper(typeof(AutoMapperProfile));
             services.AddScoped<IGeoLocationService, GeoLocationService>();
             services.AddControllers();
@@ -39,6 +50,7 @@ namespace GeoLocationApp
                     },
                 });
             });
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,6 +75,8 @@ namespace GeoLocationApp
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("AllowOrigin");
 
             app.UseAuthorization();
 

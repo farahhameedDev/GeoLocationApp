@@ -13,30 +13,36 @@ namespace GeoLocationApp.Service
 {
     public class GeoLocationService : IGeoLocationService
     {
-        const string APIKey = "1db67358ac6d4c29afef5e6b56a230f1";
+        const string APIKey = "792d1b8cea0a49bca2b95afe0c8cd230";
 
         public async Task<List<GeoLocation>> GetGeoLocationDetails(string[] locations)
         {
             IPGeolocationAPI apiGeoLocation = new IPGeolocationAPI(APIKey);
             List<GeoLocation> geoLocations = new List<GeoLocation>();
-            foreach (string location in locations)
+            try
             {
-                GeolocationParams geolocationParams = new GeolocationParams();
-                geolocationParams.SetIPAddress(location);
-
-                IPGeolocation.Geolocation geoLocationResponse = await Task.Run(() =>
-                        apiGeoLocation.GetGeolocation(geolocationParams));
-                GeoLocation geoLocation = new GeoLocation();
-                if (geoLocationResponse.GetStatus() == 200)
+                foreach (string location in locations)
                 {
-                    geoLocation.Country = geoLocationResponse.GetCountryName();
-                    geoLocation.City = geoLocationResponse.GetCity();
-                    geoLocation.IPAddress = geoLocationResponse.GetIPAddress();
-                    geoLocation.LocalTime = geoLocationResponse.GetTimezone().GetCurrentTime();
-                    geoLocation.TimeZone = geoLocationResponse.GetTimezone().GetName();
-                }
-                geoLocations.Add(geoLocation);
+                    GeolocationParams geolocationParams = new GeolocationParams();
+                    geolocationParams.SetIPAddress(location);
+                    IPGeolocation.Geolocation geoLocationResponse = await Task.Run(() =>
+                            apiGeoLocation.GetGeolocation(geolocationParams));
+                    GeoLocation geoLocation = new GeoLocation();
+                    if (geoLocationResponse.GetStatus() == 200)
+                    {
+                        geoLocation.Country = geoLocationResponse.GetCountryName();
+                        geoLocation.City = geoLocationResponse.GetCity();
+                        geoLocation.IPAddress = geoLocationResponse.GetIPAddress();
+                        geoLocation.LocalTime = geoLocationResponse.GetTimezone().GetCurrentTime();
+                        geoLocation.TimeZone = geoLocationResponse.GetTimezone().GetName();
+                    }
+                    geoLocations.Add(geoLocation);
 
+                }
+            }
+            catch (Exception ex)
+            {
+                
             }
             return geoLocations;
 

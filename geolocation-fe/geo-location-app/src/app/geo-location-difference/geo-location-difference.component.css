@@ -1,3 +1,30 @@
 .geolocation-form-field {
     width: 200px;
   }
+
+  .mat-button-base {
+    margin: 8px 8px 8px 8px;
+  }
+
+  input {
+    width: 60%;
+  }
+
+  .box {
+    float: left; 
+    width: 300px;
+    background-color:#000;
+    padding: 15px;
+    color:#fff;
+  }
+
+  .mar-20 {
+    margin-left: 20px;
+  }
+
+  .highlight {
+    text-transform: uppercase;
+    letter-spacing:2px;
+    font-size: 10px;
+    color:yellow;
+  }

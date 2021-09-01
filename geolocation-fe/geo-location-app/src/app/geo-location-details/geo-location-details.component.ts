@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { GeoLocation } from '../geolocation';
 
 @Component({
   selector: 'app-geo-location-details',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GeoLocationDetailsComponent implements OnInit {
 
+  @Input() geoLocationDetail?: GeoLocation;
   constructor() { }
 
   ngOnInit(): void {

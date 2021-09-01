@@ -5,9 +5,11 @@ using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 using System.Collections.Generic;
 using GeoLocationApp.Service.Entity;
+using Microsoft.AspNetCore.Cors;
 
 namespace GeoLocationApp.Controllers
 {
+    [EnableCors("AllowOrigin")]
     [ApiController]
     [Route("[controller]")]
     public class GeoLocationController : ControllerBase
@@ -23,7 +25,7 @@ namespace GeoLocationApp.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get(string clientLocation, string inputLocation)
+        public async Task<IActionResult> Get([FromQuery] string clientLocation,[FromQuery] string inputLocation)
         {
             string[] locations = new string[] { clientLocation, inputLocation};
             var geoLocationResult = await _geoLocationService.GetGeoLocationDetails(locations);
